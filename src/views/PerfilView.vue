@@ -1,41 +1,32 @@
 <template>
   <section>
-    <h1 v-if="userName">Bienvenido {{ userName.email }}</h1>
-    <h1 v-else>cargando...</h1>
-    <button @click="logout">Cerrar sesión</button>
+    <h1>Estas en el perfil {{ user.email }}</h1>
+    <button @click="logout">Cerrar sesion</button>
   </section>
 </template>
 
 <script>
-import { auth } from '@/db/firebase';
-import { signOut } from 'firebase/auth';
+import { auth } from "@/db/firebase"
+import { signOut } from 'firebase/auth'
 export default {
-    name: 'PerfilView',
+    name:'PerfilView',
     data(){
-        return {
-            userName: null,
-            fetch: null
+        return{
+            user: {
+                user: null
+            }
         }
     },
     methods:{
         async logout(){
-            try {
-                await signOut(auth)//Cierra la sesion del usuario
-                this.$router.push({name:'register'})//Redirige al registro
-            } catch (error) {
-                console.log('Error al cerras sesion',error.message);
-                
-            }
+            await signOut(auth)
+            this.$router.push('/')
         }
     },
     mounted(){
-        const currentUser = auth.currentUser;
-        if(currentUser){
-            this.userName = currentUser.email;
-        }else{
-            this.$router.push({ name: 'register' });
-        }
-    }    
+        this.user = auth.currentUser
+    }
+
 }
 </script>
 
