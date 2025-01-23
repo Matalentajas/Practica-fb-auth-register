@@ -100,6 +100,15 @@ export default {
         addConcern(){
             this.profile.concerns.push('')   
         },
+        handleAuthStateChance(){
+            auth.onAuthStateChanged((user) => {
+                this.user = user
+                if (user){
+                    this.fetchProfile()
+                }
+            })
+        },
+
 
     mounted(){
         this.user = auth.currentUser
