@@ -12,7 +12,7 @@
 
     <h3>Motivaciones</h3>
     <div v-for="(motivation, index) in profile.motivations" :key="index">
-        <input type="text" v-model="profile.motivacions[index]" placeholder="¿Qué te motiva?">
+        <input type="text" v-model="profile.motivations[index]" placeholder="¿Qué te motiva?">
     </div>
     <button @click.prevent="addMotivation">Añadir motivación</button>
 
